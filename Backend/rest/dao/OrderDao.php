@@ -7,11 +7,11 @@ class OrderDao extends BaseDao {
     public function __construct()
     {
         $this->table_name = "orders";
-        parent::__construct($this->table_name);
+        parent::__construct("orders");
     }
 
     public function getByOrderId($order_id) {
-        return parent::getById($order_id);
+        return $this->getByColumn('order_id', $order_id);
     }
 
     public function getByUserId($user_id) {

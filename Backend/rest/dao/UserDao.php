@@ -6,15 +6,19 @@ class UserDao extends BaseDao {
 
     public function __construct(){
         $this->table_name = "users";
-        parent::__construct($this->table_name);
+        parent::__construct("users");
     }
 
     public function getByEmail($email) {
-        $stmt = $this->connection->prepare("SELECT * FROM users WHERE email = :email");
-        $stmt->bindParam(':email', $email);
-        $stmt->execute();
-        return $stmt->fetchAll();
+    $allUsers = $this->getAll();
+    foreach ($allUsers as $user) {
+        if ($user['email'] === $email) {
+            return $user;
+        }
     }
+    return null;
+  }
+
     
     public function createUser($username, $email, $password, $role = 'user') {
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
@@ -28,10 +32,7 @@ class UserDao extends BaseDao {
     }
     
     public function deleteUser($user_id) {
-    $query = "DELETE FROM " . $this->users . " WHERE user_id = ?";
-    $stmt = $this->conn->prepare($query);
-    $stmt->bindParam(1, $user_id);
-    return $stmt->execute();
+        return $this->delete($user_id);
     }
 
     public function addAdmin($admin) {

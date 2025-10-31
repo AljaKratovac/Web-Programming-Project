@@ -7,15 +7,13 @@ class CartDao extends BaseDao {
     public function __construct()
     {
         $this->table_name = "cart";
-        parent::__construct($this->table_name);
+        parent::__construct("cart");
     }
 
-    public function getByUserId($product_id) {
-        $stmt = $this->connection->prepare("SELECT * FROM cart WHERE user_id = :user_id");
-        $stmt->bindParam(':user_id', $user_id);
-        $stmt->execute();
-        return $stmt->fetchAll();
-    } 
+    public function getByUserId($user_id) {
+        return $this->getByColumn('user_id', $user_id);
+    }
+
     public function add_to_cart($user_id, $product_id, $quantity) {
         $data = [
             'user_id' => $user_id,

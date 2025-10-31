@@ -6,23 +6,21 @@ class OrderItemsDao extends BaseDao {
 
     public function __construct(){
         $this->table_name = "order_items";
-        parent::__construct($this->table_name);
+        parent::__construct("order_items");
     }
 
     public function getByOrderId($order_id) {
-        $stmt = $this->connection->prepare("SELECT * FROM order_items WHERE order_id = :order_id");
-        $stmt->bindParam(':order_id', $order_id);
-        $stmt->execute();
-        return $stmt->fetchAll();
+        return $this->getByColumn('order_id', $order_id);
     }
-    public function addOrderItem($order_items) {
-        return $this->insert($order_items);
+
+    public function addOrderItem($data) {
+        return $this->insert($data);
     }
     public function getAllOrderItems($order_id) {
         return parent::getAll();
     }
-     public function updateOrderItem($id, $order_items) {
-        return parent::update($id, $order_items);
+     public function updateOrderItem($id, $data) {
+        return parent::update($id, $data);
     }
 
     public function deleteOrderItem($id) {
