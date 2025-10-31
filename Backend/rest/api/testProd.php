@@ -1,0 +1,19 @@
+<?php
+header('Content-Type: application/json');
+require_once '../dao/ProductDao.php';
+try {
+    $productDAO = new ProductDao();
+    $data = $productDAO->getAll();
+
+    echo json_encode([
+        'success' => true,
+        'message' => 'DAO connection successful!',
+        'data' => $data
+    ]);
+} catch (Exception $e) {
+    echo json_encode([
+        'success' => false,
+        'message' => 'DAO test failed: ' . $e->getMessage()
+    ]);
+}
+?>

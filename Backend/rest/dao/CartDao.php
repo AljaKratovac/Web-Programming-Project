@@ -1,0 +1,44 @@
+<?php
+require_once 'BaseDao.php';
+
+class CartDao extends BaseDao {
+    protected $table_name;
+
+    public function __construct()
+    {
+        $this->table_name = "cart";
+        parent::__construct($this->table_name);
+    }
+
+    public function getByUserId($product_id) {
+        $stmt = $this->connection->prepare("SELECT * FROM cart WHERE user_id = :user_id");
+        $stmt->bindParam(':user_id', $user_id);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    } 
+    public function add_to_cart($user_id, $product_id, $quantity) {
+        $data = [
+            'user_id' => $user_id,
+            'product_id' => $product_id,
+            'quantity' => $quantity
+        ];
+        return $this->insert($data); 
+    }
+    
+    public function getById($cart_id) {
+        return parent::getById($cart_id);
+    }
+
+    public function create($cart_data) {
+        return $this->insert($cart_data);
+    }
+
+    public function updateCart($cart_id, $cart_data) {
+        return $this->update($cart_id, $cart_data);
+    }
+    public function deleteCart($cart_id) {
+        return parent::delete($cart_id);
+    }
+
+       
+}
