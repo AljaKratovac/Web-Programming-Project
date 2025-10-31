@@ -9,15 +9,10 @@ class UserDao extends BaseDao {
         parent::__construct("users");
     }
 
-    public function getByEmail($email) {
-    $allUsers = $this->getAll();
-    foreach ($allUsers as $user) {
-        if ($user['email'] === $email) {
-            return $user;
-        }
+    public function getByEmail($email) { $stmt = $this->connection->prepare
+        ("SELECT * FROM users WHERE email = :email"); 
+        $stmt->bindParam(':email', $email); $stmt->execute(); return $stmt->fetchAll(); 
     }
-    return null;
-  }
 
     
     public function createUser($username, $email, $password, $role = 'user') {
