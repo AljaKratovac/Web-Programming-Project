@@ -35,8 +35,7 @@ class CartDao extends BaseDao {
         return $this->update($cart_id, $cart_data);
     }
     public function deleteCart($cart_id) {
-        return parent::delete($cart_id);
+        return $this->delete($cart_id);
     }
-
-       
+  
 }

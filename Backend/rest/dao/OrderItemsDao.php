@@ -16,10 +16,12 @@ class OrderItemsDao extends BaseDao {
     public function addOrderItem($data) {
         return $this->insert($data);
     }
-    public function getAllOrderItems($order_id) {
-        return parent::getAll();
+    
+    public function getAllOrderItems($order_id) { 
+        return $this->getByColumn('order_id', $order_id);
     }
-     public function updateOrderItem($id, $data) {
+    
+    public function updateOrderItem($id, $data) {
         return parent::update($id, $data);
     }
 
