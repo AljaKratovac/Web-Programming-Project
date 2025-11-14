@@ -12,7 +12,7 @@ class CartService extends BaseService {
         return $this->dao->getAll();
     }
 
-    public function getById($cart_id) {
+    public function getById($id) {
         return $this->dao->getById($id);
     }
 
@@ -20,12 +20,15 @@ class CartService extends BaseService {
         return $this->dao->insert($data);
     }
 
-    public function updateCart($cart_id, $data) {
-        return $this->dao->update($cart_id, $data);
+    public function updateCart($id, $data) {
+        return $this->dao->update($id, $data);
+    }
+    public function partial_cart_update($id, $data) {
+        return $this->dao->partial_cart_update($id, $data);
     }
 
-    public function deleteCart($cart_id) {
-        return $this->dao->delete($cart_id);
+    public function deleteCart($id) {
+        return $this->dao->delete($id);
     }
 }
 ?>

@@ -24,6 +24,9 @@ class OrderItemsDao extends BaseDao {
     public function updateOrderItem($id, $data) {
         return parent::update($id, $data);
     }
+    public function partial_update_orderItems($id, $data) {
+        return $this->update($id, $data);
+    }
 
     public function deleteOrderItem($id) {
         return parent::delete($id);

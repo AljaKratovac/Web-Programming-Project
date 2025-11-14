@@ -24,6 +24,10 @@ class OrderItemsService extends BaseService {
         return $this->dao->update($id, $data);
     }
 
+    public function partial_update_orderItems($id, $data) {
+        return $this->dao->partial_update_orderItems($id, $data);
+    }
+
     public function deleteOrderItem($id) {
         return $this->dao->delete($id);
     }

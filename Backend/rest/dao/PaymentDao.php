@@ -20,6 +20,9 @@ class PaymentDao extends BaseDao {
     public function updatePayment($payment_id, $data) {
         return $this->update($payment_id, $data);
     }
+    public function partial_update_payment($id, $data) {
+        return $this->update($id, $data);
+    }
     public function deletePayment($payment_id) {
         return $this->delete($payment_id);
     }

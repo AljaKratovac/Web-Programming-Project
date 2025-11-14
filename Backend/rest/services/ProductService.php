@@ -13,19 +13,23 @@ class ProductService extends BaseService {
     }
 
     public function getById($id) {
-        return $this->dao->getProductById($id); 
+        return $this->dao->getById($id); 
     }
 
-    public function add($data) {
-        return $this->dao->insertProduct($data);
+    public function insertProduct($data) {
+        return $this->dao->insert($data);
     }
 
-    public function update($id, $data) {
-        return $this->dao->updateProduct($id, $data); 
+    public function updateProduct($id, $data) {
+        return $this->dao->update($id, $data); 
+    }
+    public function partial_update_product($id, $data) {
+        return $this->dao->partial_update_product($id, $data);
     }
 
-    public function delete($id) {
-        return $this->dao->deleteProduct($product_id); 
+
+    public function deleteProduct($id) {
+        return $this->dao->delete($id); 
     }
 }
 ?>

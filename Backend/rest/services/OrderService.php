@@ -16,12 +16,15 @@ class OrderService extends BaseService {
         return $this->dao->getById($id);
     }
 
-    public function addOrder($data) {
+    public function addOrders($data) {
         return $this->dao->insert($data);
     }
 
     public function updateOrder($id, $data) {
         return $this->dao->update($id, $data);
+    }
+    public function partial_update_order($id, $data) {
+        return $this->dao->partial_update_order($id, $data);
     }
 
     public function deleteOrder($id) {

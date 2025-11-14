@@ -23,6 +23,9 @@ class PaymentService extends BaseService {
     public function updatePayment($id, $data) {
         return $this->dao->update($id, $data);
     }
+    public function partial_update_payment($id, $data) {
+        return $this->dao->partial_update_payment($id, $data);
+    }
 
     public function deletePayment($id) {
         return $this->dao->delete($id);

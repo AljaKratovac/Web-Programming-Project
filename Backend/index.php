@@ -14,9 +14,9 @@ require_once __DIR__ . '/rest/services/CartService.php';
 Flight::register('userService', 'UserService');
 Flight::register('productService', 'ProductService');
 Flight::register('paymentService', 'PaymentService');
-Flight::register('paymentService', 'OrderService');
-Flight::register('paymentService', 'OrderItemsService');
-Flight::register('paymentService', 'CartService');
+Flight::register('orderService', 'OrderService');
+Flight::register('orderItemsService', 'OrderItemsService');
+Flight::register('cartService', 'CartService');
 
 
 require_once __DIR__ . '/rest/routes/UserRoutes.php';

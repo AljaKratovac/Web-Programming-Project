@@ -1,26 +1,137 @@
 <?php
-// Get a specific cart by ID
-Flight::route('GET /cart/@id', function($id){
-   Flight::json(Flight::CartService()->get_cart_by_id($id));
+
+/**
+ * @OA\Get(
+ *     path="/cart/{id}",
+ *     tags={"carts"},
+ *     summary="Get cart by ID",
+ *     @OA\Parameter(
+ *         name="id",
+ *         in="path",
+ *         required=true,
+ *         description="ID of the cart",
+ *         @OA\Schema(type="integer", example=1)
+ *     ),
+ *     @OA\Response(
+ *         response=200,
+ *         description="Returns the cart with the given ID"
+ *     )
+ * )
+ */
+Flight::route('GET /cart/@id', function($id){ 
+    Flight::json(Flight::cartService()->getById($id));
 });
 
-// Add a new cart..
+/**
+ * @OA\Post(
+ *     path="/cart",
+ *     tags={"carts"},
+ *     summary="Add a new cart",
+ *     @OA\RequestBody(
+ *         required=true,
+ *         @OA\JsonContent(
+ *             required={"user_id"},
+ *             @OA\Property(property="user_id", type="integer", example=1),
+ *             @OA\Property(property="cart_id", type="integer", example=1),
+ *             @OA\Property(property="quantity", type="number", format="float", example=25.50),
+ *       
+ *         )
+ *     ),
+ *     @OA\Response(
+ *         response=200,
+ *         description="New cart created"
+ *     )
+ * )
+ */
 Flight::route('POST /cart', function(){
-   $data = Flight::request()->data->getData();
-   Flight::json(Flight::CartService()->add_cart($data));
+    $data = Flight::request()->data->getData();
+    Flight::json(Flight::cartService()->addTocart($data));
 });
-// Update cart by ID
+
+/**
+ * @OA\Put(
+ *     path="/cart/{id}",
+ *     tags={"carts"},
+ *     summary="Update an existing cart by ID",
+ *     @OA\Parameter(
+ *         name="id",
+ *         in="path",
+ *         required=true,
+ *         description="Cart ID",
+ *         @OA\Schema(type="integer", example=1)
+ *     ),
+ *     @OA\RequestBody(
+ *         required=true,
+ *         @OA\JsonContent(
+ *             required={"user_id"},
+ *             @OA\Property(property="user_id", type="integer", example=1),
+ *             @OA\Property(property="cart_id", type="integer", example=1),
+ *             @OA\Property(property="quantity", type="number", format="float", example=30.75),
+ *  
+ *         )
+ *     ),
+ *     @OA\Response(
+ *         response=200,
+ *         description="Cart updated"
+ *     )
+ * )
+ */
 Flight::route('PUT /cart/@id', function($id){
-   $data = Flight::request()->data->getData();
-   Flight::json(Flight::CartService()->update_cart($id, $data));
+    $data = Flight::request()->data->getData();
+    Flight::json(Flight::cartService()->updateCart($id, $data));
 });
-// Partially update cart by ID
+
+/**
+ * @OA\Patch(
+ *     path="/cart/{id}",
+ *     tags={"carts"},
+ *     summary="Partially update a cart by ID",
+ *     @OA\Parameter(
+ *         name="id",
+ *         in="path",
+ *         required=true,
+ *         description="Cart ID",
+ *         @OA\Schema(type="integer", example=1)
+ *     ),
+ *     @OA\RequestBody(
+ *         required=true,
+ *         @OA\JsonContent(
+ *             @OA\Property(property="user_id", type="integer", example=1),
+ *             @OA\Property(property="cart_id", type="integer", example=2),
+ *             @OA\Property(property="quantity", type="number", format="float", example=35.25),
+ *     
+ *         )
+ *     ),
+ *     @OA\Response(
+ *         response=200,
+ *         description="Cart partially updated"
+ *     )
+ * )
+ */
 Flight::route('PATCH /cart/@id', function($id){
-   $data = Flight::request()->data->getData();
-   Flight::json(Flight::CartService()->partial_cart_user($id, $data));
+    $data = Flight::request()->data->getData();
+    Flight::json(Flight::cartService()->partial_cart_update($id, $data));
 });
-// Delete cart by ID
+
+/**
+ * @OA\Delete(
+ *     path="/cart/{id}",
+ *     tags={"carts"},
+ *     summary="Delete a cart by ID",
+ *     @OA\Parameter(
+ *         name="id",
+ *         in="path",
+ *         required=true,
+ *         description="Cart ID",
+ *         @OA\Schema(type="integer", example=1)
+ *     ),
+ *     @OA\Response(
+ *         response=200,
+ *         description="Cart deleted"
+ *     )
+ * )
+ */
 Flight::route('DELETE /cart/@id', function($id){
-   Flight::json(Flight::CartService()->delete_cart($id));
+    Flight::json(Flight::cartService()->deleteCart($id));
 });
 ?>

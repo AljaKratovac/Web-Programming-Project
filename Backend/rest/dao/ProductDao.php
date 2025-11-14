@@ -27,6 +27,11 @@ class ProductDAO extends BaseDao {
         return parent::insert($mappedData);
     }
 
+    public function partial_update_product($id, $data) {
+        return $this->update($id, $data);
+    }
+
+
 
     public function getAllProducts() {
         return parent::getAll();
