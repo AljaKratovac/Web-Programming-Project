@@ -161,4 +161,3 @@ Flight::route('PATCH /products/@id', function($id){
 Flight::route('DELETE /products/@id', function($id){
     Flight::json(Flight::productService()->deleteProduct($id));
 });
-?>

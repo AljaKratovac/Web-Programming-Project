@@ -29,5 +29,5 @@ class PaymentDao extends BaseDao {
     public function getAllPayments() {
         return $this->getAll();
     }
-
 }
+?>

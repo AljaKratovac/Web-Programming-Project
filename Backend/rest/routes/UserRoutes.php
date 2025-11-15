@@ -137,4 +137,3 @@ Flight::route('PATCH /users/@id', function($id){
 Flight::route('DELETE /users/@id', function($id){
     Flight::json(Flight::userService()->deleteUser($id));
 });
-?>

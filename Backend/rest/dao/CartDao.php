@@ -38,9 +38,9 @@ class CartDao extends BaseDao {
     public function partial_cart_update($id, $data) {
         return $this->update($id, $data);
     }
-    
+
     public function deleteCart($cart_id) {
         return $this->delete($cart_id);
-    }
-  
+    } 
 }
+?>

@@ -108,7 +108,6 @@ Flight::route('PUT /cart/@id', function($id){
     $data = Flight::request()->data->getData();
     Flight::json(Flight::cartService()->updateCart($id, $data));
 });
-
 /**
  * PATCH partially update a cart
  * @OA\Patch(
@@ -140,7 +139,6 @@ Flight::route('PATCH /cart/@id', function($id){
     $data = Flight::request()->data->getData();
     Flight::json(Flight::cartService()->partial_cart_update($id, $data));
 });
-
 /**
  * DELETE a cart
  * @OA\Delete(
@@ -163,4 +161,3 @@ Flight::route('PATCH /cart/@id', function($id){
 Flight::route('DELETE /cart/@id', function($id){
     Flight::json(Flight::cartService()->deleteCart($id));
 });
-?>

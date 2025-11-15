@@ -173,4 +173,3 @@ Flight::route('PATCH /payments/@id', function($id){
 Flight::route('DELETE /payments/@id', function($id){
     Flight::json(Flight::paymentService()->deletePayment($id));
 });
-?>
