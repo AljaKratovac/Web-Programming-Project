@@ -1,49 +1,62 @@
 <?php
 /**
+ * GET all products
  * @OA\Get(
- *      path="/product",
- *      tags={"products"},
- *      summary="Get all products",
- *      @OA\Parameter(
- *          name="category",
- *          in="query",
- *          required=false,
- *          @OA\Schema(type="string"),
- *          description="Optional category to filter products"
- *      ),
- *      @OA\Parameter(
- *          name="product_id",
- *          in="query",
- *          required=false,
- *          @OA\Schema(type="integer"),
- *          description="Optional restaurant ID to filter products"
- *      ),
- *      @OA\Response(
- *           response=200,
- *           description="Array of all products in the database"
- *      )
+ *     path="/products",
+ *     tags={"products"},
+ *     summary="Get all products",
+ *     @OA\Response(
+ *         response=200,
+ *         description="Array of all products in the database"
+ *     )
+ * )
+ */
+Flight::route('GET /products', function(){
+    Flight::json(Flight::productService()->getAll());
+});
+
+/**
+ * GET product by ID
+ * @OA\Get(
+ *     path="/products/{id}",
+ *     tags={"products"},
+ *     summary="Get product by ID",
+ *     @OA\Parameter(
+ *         name="id",
+ *         in="path",
+ *         required=true,
+ *         description="Product ID",
+ *         @OA\Schema(type="integer", example=1)
+ *     ),
+ *     @OA\Response(
+ *         response=200,
+ *         description="Details of a single product"
+ *     ),
+ *     @OA\Response(
+ *         response=404,
+ *         description="Product not found"
+ *     )
  * )
  */
 Flight::route('GET /products/@id', function($id){
-   Flight::json(Flight::productService()->getById($id));
+    Flight::json(Flight::productService()->getById($id));
 });
 
-
-
 /**
+ * Add a new product
  * @OA\Post(
- *     path="/product",
+ *     path="/products",
  *     tags={"products"},
  *     summary="Add a new product",
  *     @OA\RequestBody(
  *         required=true,
  *         @OA\JsonContent(
- *             required={"name", "price", "restaurant_id"},
+ *             type="object",
+ *             required={"name","price","id"},
  *             @OA\Property(property="name", type="string", example="Bag44"),
  *             @OA\Property(property="price", type="number", format="float", example=12.99),
  *             @OA\Property(property="stock_quantity", type="integer", example=3),
- *             @OA\Property(property="description", type="string", example="topic"),
- *             @OA\Property(property="image_url", type="string", example="https://example.com/pizza.jpg")
+ *             @OA\Property(property="description", type="string", example="Red bag")                      
  *         )
  *     ),
  *     @OA\Response(
@@ -58,8 +71,9 @@ Flight::route('POST /products', function(){
 });
 
 /**
+ * Update an existing product
  * @OA\Put(
- *     path="/product/{id}",
+ *     path="/products/{id}",
  *     tags={"products"},
  *     summary="Update an existing product by ID",
  *     @OA\Parameter(
@@ -72,12 +86,12 @@ Flight::route('POST /products', function(){
  *     @OA\RequestBody(
  *         required=true,
  *         @OA\JsonContent(
- *             required={"name", "price", "id"},
- *             @OA\Property(property="name", type="string", example="Bag"),
+ *             type="object",
+ *             required={"name","price","id"},
+ *             @OA\Property(property="name", type="string", example="Updated Bag"),
  *             @OA\Property(property="price", type="number", format="float", example=15.99),
- *             @OA\Property(property="stock_quantity", type="integer", example=1),
- *             @OA\Property(property="description", type="string", example="Updated description"),
- *             @OA\Property(property="image_url", type="string", example="https://example.com/new-pizza.jpg")
+ *             @OA\Property(property="stock_quantity", type="integer", example=5),
+ *             @OA\Property(property="description", type="string", example="Updated description")
  *         )
  *     ),
  *     @OA\Response(
@@ -92,8 +106,9 @@ Flight::route('PUT /products/@id', function($id){
 });
 
 /**
+ * Partially update a product
  * @OA\Patch(
- *     path="/product/{id}",
+ *     path="/products/{id}",
  *     tags={"products"},
  *     summary="Partially update a product by ID",
  *     @OA\Parameter(
@@ -106,10 +121,11 @@ Flight::route('PUT /products/@id', function($id){
  *     @OA\RequestBody(
  *         required=true,
  *         @OA\JsonContent(
- *             @OA\Property(property="name", type="string", example="Only name changed"),
+ *             type="object",
+ *             @OA\Property(property="name", type="string", example="Partial name update"),
  *             @OA\Property(property="price", type="number", format="float", example=13.99),
- *             @OA\Property(property="category", type="string", example="Updated Category"),
- *             @OA\Property(property="description", type="string", example="Only description updated")
+ *             @OA\Property(property="stock_quantity", type="integer", example=2),
+ *             @OA\Property(property="description", type="string", example="Partial description update")
  *         )
  *     ),
  *     @OA\Response(
@@ -124,8 +140,9 @@ Flight::route('PATCH /products/@id', function($id){
 });
 
 /**
+ * Delete a product
  * @OA\Delete(
- *     path="/product/{id}",
+ *     path="/products/{id}",
  *     tags={"products"},
  *     summary="Delete a product by ID",
  *     @OA\Parameter(

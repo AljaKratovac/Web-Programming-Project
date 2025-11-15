@@ -27,7 +27,6 @@ class ProductService extends BaseService {
         return $this->dao->partial_update_product($id, $data);
     }
 
-
     public function deleteProduct($id) {
         return $this->dao->delete($id); 
     }

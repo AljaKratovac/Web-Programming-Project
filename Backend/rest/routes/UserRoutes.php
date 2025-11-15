@@ -23,7 +23,7 @@ Flight::route('GET /users/@id', function($id){
 
 /**
  * @OA\Post(
- *     path="/user",
+ *     path="/users",
  *     tags={"users"},
  *     summary="Add a new user",
  *     @OA\RequestBody(
@@ -51,7 +51,7 @@ Flight::route('POST /users', function(){
 
 /**
  * @OA\Put(
- *     path="/user/{id}",
+ *     path="/users/{id}",
  *     tags={"users"},
  *     summary="Update an existing user by ID",
  *     @OA\Parameter(
@@ -86,7 +86,7 @@ Flight::route('PUT /users/@id', function($id){
 
 /**
  * @OA\Patch(
- *     path="/user/{id}",
+ *     path="/users/{id}",
  *     tags={"users"},
  *     summary="Partially update a user by ID",
  *     @OA\Parameter(
@@ -118,7 +118,7 @@ Flight::route('PATCH /users/@id', function($id){
 
 /**
  * @OA\Delete(
- *     path="/user/{id}",
+ *     path="/users/{id}",
  *     tags={"users"},
  *     summary="Delete a user by ID",
  *     @OA\Parameter(
