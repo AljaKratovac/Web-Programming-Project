@@ -27,12 +27,18 @@ class ProductDAO extends BaseDao {
         return parent::insert($mappedData);
     }
 
-    public function deleteProduct($product_id) {
-        return $this->delete($product_id);
+    public function partial_update_product($id, $data) {
+        return $this->update($id, $data);
     }
+
+
 
     public function getAllProducts() {
         return parent::getAll();
+    }
+
+    public function deleteProduct($product_id) {
+    return parent::delete($product_id);
     }
 }
 ?>

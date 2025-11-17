@@ -25,6 +25,13 @@ class UserDao extends BaseDao {
         ]);
 
     }
+    public function addUser($data) {
+        return $this->insert("users", $data);
+    }
+
+    public function partial_update_user($id, $data) {
+        return $this->update($id, $data);
+    }
     
     public function deleteUser($user_id) {
         return $this->delete($user_id);

@@ -24,5 +24,8 @@ class OrderDao extends BaseDao {
     public function deleteOrder($order_id) {
         return $this->delete($order_id);
     }
+     public function partial_update_order($id, $data) {
+        return $this->update($id, $data);
+    }
 }
 ?>
