@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../config.php';
+require_once __DIR__ . '/../db.php';
 
 
 class BaseDao {
@@ -28,14 +28,15 @@ class BaseDao {
    }
 
 
-   public function insert($data) {
+    public function insert($data) {
        $columns = implode(", ", array_keys($data));
        $placeholders = ":" . implode(", :", array_keys($data));
        $sql = "INSERT INTO " . $this->table . " ($columns) VALUES ($placeholders)";
        $stmt = $this->connection->prepare($sql);
        return $stmt->execute($data);
    }
-      public function update($id, $data) {
+    
+    public function update($id, $data) {
        $fields = "";
        foreach ($data as $key => $value) {
            $fields .= "$key = :$key, ";
@@ -53,5 +54,11 @@ class BaseDao {
        $stmt->bindParam(':id', $id);
        return $stmt->execute();
    }
+
+   public function query_unique($query, $params = []) {
+    $stmt = $this->connection->prepare($query);
+    $stmt->execute($params);
+    return $stmt->fetch();
+}
 }
 ?>

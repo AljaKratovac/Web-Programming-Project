@@ -1,4 +1,18 @@
+# .htaccess
 RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*)$ index.php [QSA,L]
+
+# FIX FOR PATCH/PUT/DELETE REQUESTS
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteCond %{REQUEST_METHOD} ^(PATCH|PUT|DELETE)$
+    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization},L]
+</IfModule>
+
+# Ensure request body is available
+<IfModule mod_rewrite.c>
+    RewriteCond %{REQUEST_METHOD} ^(PATCH|PUT|POST)$
+    RewriteRule .* - [E=HTTP_RAW_POST_DATA:%{HTTP:RAW_POST_DATA}]
+</IfModule>

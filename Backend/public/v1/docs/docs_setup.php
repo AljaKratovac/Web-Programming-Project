@@ -2,17 +2,17 @@
 /**
 * @OA\Info(
 *     title="API",
-*     description="BagShop API",
+*     description="Web-Programming-Project API",
 *     version="1.0",
 *     @OA\Contact(
 *         email="alja.kratovac@stu.ibu.edu.ba",
-*         name="BagShop"
+*         name="Web-Programming-Project"
 *     )
 * )
 */
 /**
 * @OA\Server(
-*     url= "http://localhost/BagShop/Backend",
+*     url= "http://localhost/Web-Programming-Project/Backend",
 *     description="API server"
 * )
 */
