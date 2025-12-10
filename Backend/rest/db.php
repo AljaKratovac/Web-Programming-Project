@@ -6,6 +6,7 @@ class Database {
    private static $password = '';
    private static $connection = null;
 
+   
 
 
 
