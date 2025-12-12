@@ -1,0 +1,152 @@
+<section id="users">
+    <div class="container">
+        <h1>Users Management</h1>
+        <button 
+                type="button" 
+                class="btn btn-info btn-lg" 
+                data-toggle="modal" 
+                data-target="#addUserModal" 
+                onclick="UserService.openAddModal()"
+            >Add User</button>
+
+        <!-- Add Modal -->
+        <div class="modal" id="addUserModal">
+            <div class="modal-dialog">
+                <form id="addUserForm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Add User</h5>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label>Name:</label>
+                            <input type="text" class="form-control" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Email:</label>
+                            <input type="email" class="form-control" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Password:</label>
+                            <input type="password" class="form-control" id="password" name="password" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Role:</label>
+                            <select class="form-control" name="role" required>
+                                <option value="user">User</option>
+                                <option value="admin">Admin</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="UserService.closeModal()">Close</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!--Table-->
+        <table id="users-table" class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>UserName</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                </tr>
+            </thead>
+            <tbody id="users-table-body">
+                <!-- Users will be populated here by JavaScript -->
+            </tbody>
+        </table>
+
+        <!-- Edit Modal -->
+        <div class="modal" id="editUserModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <form id="editUserForm">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Edit User</h5>
+                        </div>
+                        <div class="modal-body">
+                            <input type="text" id="edit_user_id" name="id" required hidden />
+                            <div class="form-group">
+                                <label for="name">Name:</label>
+                                <input type="text" class="form-control" id="edit_name" name="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email:</label>
+                                <input type="email" class="form-control" id="edit_email" name="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="role">Role:</label>
+                                <select class="form-control" id="edit_role" name="role" required>
+                                    <option value="user">User</option>
+                                    <option value="admin">Admin</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="UserService.closeModal()">Close</button>
+                            <button type="submit" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+            
+        <!-- Delete User Modal -->
+        <div
+            class="modal fade"
+            id="deleteUserModal"
+            tabindex="-1"
+            role="dialog"
+            aria-labelledby="exampleModalLabel"
+            aria-hidden="true"
+        >
+        <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Delete User</h5>
+                        <button
+                            type="button"
+                            class="close"
+                            data-dismiss="modal"
+                            aria-label="Close"
+                        >
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <input id="delete_user_id" name="id" hidden />
+                    <div class="modal-body" id="delete-user-body">
+                        Are you sure you want to delete this user?
+                    </div>
+                    <div class="modal-footer">
+                        <button
+                            type="button"
+                            class="btn btn-default"
+                            id="close_button"
+                            data-dismiss="modal"
+                            onclick="UserService.closeModal()"
+                        >
+                            Close
+                        </button>
+                        <button
+                            type="submit"
+                            onclick="UserService.deleteUser()"
+                            class="btn btn-danger"
+                        >
+                            Delete
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+   UserService.init();  
+</script>
