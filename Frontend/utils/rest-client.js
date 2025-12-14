@@ -1,58 +1,64 @@
-const RestClient = {
-    baseUrl: 'http://localhost/Web-Programming-Project/Backend/', 
-    
-    getHeaders: function() {
-        const headers = {
-            'Content-Type': 'application/json'
-        };
-        
-        const token = localStorage.getItem('token');
-        if (token) {
-            headers['Authorization'] = 'Bearer ' + token;
-        }
-        
-        return headers;
-    },
-    
-    get: function(endpoint, success, error) {
+let RestClient = {
+    get: function (url, callback, error_callback) {
         $.ajax({
-            url: this.baseUrl + endpoint,
-            type: 'GET',
-            headers: this.getHeaders(),
-            success: success,
-            error: error
+            url: Constants.PROJECT_BASE_URL + url,
+            type: "GET",
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader(
+                    "Authorization",
+                    "Bearer " + localStorage.getItem("user_token")
+                );
+                xhr.setRequestHeader("Content-Type", "application/json"); 
+
+            },
+            success: function (response) {
+                if (callback) callback(response);
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                if (error_callback) error_callback(jqXHR);
+            }
         });
     },
-    
-    post: function(endpoint, data, success, error) {
+
+    request: function (url, method, data, callback, error_callback) {
         $.ajax({
-            url: this.baseUrl + endpoint,
-            type: 'POST',
-            headers: this.getHeaders(),
-            data: JSON.stringify(data),
-            success: success,
-            error: error
+        url: Constants.PROJECT_BASE_URL + url,
+        type: method,
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader(
+                "Authorization",
+                "Bearer " + localStorage.getItem("user_token")
+            );
+            xhr.setRequestHeader("Content-Type", "application/json"); 
+
+        },
+        data: data,
+        })
+        .done(function (response, status, jqXHR) {
+            if (callback) callback(response);
+        })
+        .fail(function (jqXHR, textStatus, errorThrown) {
+            if (error_callback) {
+            error_callback(jqXHR);
+            } else {
+            toastr.error(jqXHR.responseJSON.message);
+            }
         });
     },
-    
-    put: function(endpoint, data, success, error) {
-        $.ajax({
-            url: this.baseUrl + endpoint,
-            type: 'PUT',
-            headers: this.getHeaders(),
-            data: JSON.stringify(data),
-            success: success,
-            error: error
-        });
+
+    post: function (url, data, callback, error_callback) {
+        RestClient.request(url, "POST", data, callback, error_callback);
     },
-    
-    delete: function(endpoint, success, error) {
-        $.ajax({
-            url: this.baseUrl + endpoint,
-            type: 'DELETE',
-            headers: this.getHeaders(),
-            success: success,
-            error: error
-        });
-    }
-};
+
+    delete: function (url, data, callback, error_callback) {
+        RestClient.request(url, "DELETE", data, callback, error_callback);
+    },
+
+    patch: function (url, data, callback, error_callback) {
+        RestClient.request(url, "PATCH", data, callback, error_callback);
+    },
+
+    put: function (url, data, callback, error_callback) {
+        RestClient.request(url, "PUT", data, callback, error_callback);
+    },
+ };

@@ -1,5 +1,5 @@
 let Constants = {
-   PROJECT_BASE_URL: "http://localhost:8000",
+   PROJECT_BASE_URL: "http://localhost/Web-Programming-Project/Backend/",
    USER_ROLE: "user",
    ADMIN_ROLE: "admin"
 }
