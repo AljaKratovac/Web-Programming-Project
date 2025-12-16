@@ -11015,4 +11015,25 @@ textarea.form-control-lg {
       margin: 0;
       font-family: Arial, sans-serif;
     }
+  html, body {
+  height: 100%;
+  margin: 0;
+}
+
+.page {
+  min-height: 100vh;      /* full screen height */
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;                /* pushes footer down */
+}
+
+footer {
+  background: #1f2428;
+  color: white;
+  text-align: center;
+  padding: 20px;
+}
 }
