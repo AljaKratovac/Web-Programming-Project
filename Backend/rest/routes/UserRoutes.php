@@ -20,7 +20,6 @@
 Flight::route('GET /users/@id', function($id){
     Flight::json(Flight::userService()->getById($id));
 });
-
 /**
  * @OA\Post(
  *     path="/users",
@@ -48,7 +47,6 @@ Flight::route('POST /users', function(){
     $data = Flight::request()->data->getData();
     Flight::json(Flight::userService()->addUser($data));
 });
-
 /**
  * @OA\Put(
  *     path="/users/{id}",

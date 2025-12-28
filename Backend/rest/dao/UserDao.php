@@ -26,7 +26,7 @@ class UserDao extends BaseDao {
 
     }
     public function addUser($data) {
-        return $this->insert("users", $data);
+        return $this->insert($data);
     }
 
     public function partial_update_user($id, $data) {

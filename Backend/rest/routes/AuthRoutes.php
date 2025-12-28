@@ -81,7 +81,7 @@ Flight::group('/auth', function() {
     *      )
     * )
     */
-   Flight::route('POST /login', function() {
+    Flight::route('POST /login', function() {
        $data = Flight::request()->data->getData();
 
 
@@ -96,4 +96,4 @@ Flight::group('/auth', function() {
            Flight::halt(500, $response['error']);
        }
    });
-});
+}); 

@@ -19,13 +19,6 @@
  *         description="Optional status to filter orders",
  *         @OA\Schema(type="string")
  *     ),
- *     @OA\Parameter(
- *         name="restaurant_id",
- *         in="query",
- *         required=false,
- *         description="Optional restaurant ID to filter orders",
- *         @OA\Schema(type="integer")
- *     ),
  *     @OA\Response(
  *         response=200,
  *         description="Array of all orders in the database"
