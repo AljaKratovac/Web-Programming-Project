@@ -1,8 +1,8 @@
 $(document).ready(function () {
     var app = $.spapp({
-        defaultView: "home", // which view loads first
-        templateDir: "views/" // where view files are stored
+        defaultView: "home", 
+        templateDir: "views/" 
     });
-    UserService.generateMenuItems();
     app.run();
+    UserService.init();
 });

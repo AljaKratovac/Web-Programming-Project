@@ -12,12 +12,6 @@ class AuthService extends BaseService {
        parent::__construct(new AuthDao);
    }
 
-
-   public function get_user_by_email($email){
-       return $this->auth_dao->get_user_by_email($email);
-   }
-
-
    public function register($entity) {  
        if (empty($entity['email']) || empty($entity['password'])) {
            return ['success' => false, 'error' => 'Email and password are required.'];
